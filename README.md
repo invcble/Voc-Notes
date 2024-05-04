@@ -1,4 +1,4 @@
-# Live Lecture Processing System
+# Voc-Notes : A Free-to-use AI Notebook Tool
 
 ## Project Overview
 
