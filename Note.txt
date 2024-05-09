@@ -1,5 +1,5 @@
 1. Audio to Text Conversion
-Utilizing a cloud service like Google Cloud Speech-to-Text, Microsoft Azure Speech Service, or Amazon Transcribe to convert live audio to text is an efficient way to capture lecture content in real-time. These services are highly accurate and can handle different accents, dialects, and even noisy environments, making them ideal for live lectures.
+Utilizing a cloud service like Google Cloud Speech-to-Text, or OpenAI whisper local module to convert live audio to text is an efficient way to capture lecture content in real-time. These services are highly accurate and can handle different accents, dialects, and even noisy environments, making them ideal for live lectures.
 
 2. Data Preprocessing Through Apache Spark
 Once the audio is converted to text, using Apache Spark for data preprocessing allows you to clean and structure the text data efficiently. This can include tasks like removing irrelevant speech or noise, normalizing text for consistency, segmenting lectures into logical parts, and any other necessary text transformations to prepare the data for further processing. Spark’s distributed nature ensures this can be done quickly and scalably, even with large volumes of data.
