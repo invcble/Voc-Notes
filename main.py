@@ -7,7 +7,7 @@ import time
 
 
 # Audio sample rate
-fs = 44100
+fs = 16000
 seconds = 3
 
 global audio_queue

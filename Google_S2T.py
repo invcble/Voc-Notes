@@ -9,7 +9,7 @@ audio_data = speech.RecognitionAudio(content = audio_file)
 
 
 config = speech.RecognitionConfig(
-    sample_rate_hertz = 44100,
+    sample_rate_hertz = 16000,
     enable_automatic_punctuation = True,
     language_code = 'en-US'
 )
