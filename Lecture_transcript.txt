@@ -1,0 +1,813 @@
+Hello, everyone!
+Can you guys see and hear me
+and the share.
+
+Greg Boulrice
+00:01:59
+Yeah, we can.
+
+Mq Quraishi
+00:02:00
+Bull.
+Okay. So today's lecture is is probably going to be a short one, because it's it's actually.
+in my opinion, just talking about one of the
+maybe
+ways of creating architectures, and the best way to go through.
+You know the last few lectures that we've been talking about
+how to model and architecture and the styles and patterns to use
+the way the web architecture was documented and historically shared was one of the better
+ways and techniques. So
+that's what we're just gonna review today. So you know,
+let's make it interactive. As always, I love to hear your opinions
+as we go through the lectures
+about what we're reviewing, what we've gone through. But first off, I just want to mention that
+The first few assign 1. One of the assignments is fully graded.
+The I think there's one that's being in that's still in progress
+that we're working through.
+And what you guys should be following is the calendar, and not necessarily the order in which the course assignments are laid out.
+So if you look at the calendar, it'll tell you which assignment is due when
+but if you look at, I just reordered it. But if you look at the order of
+the course assignments, not the not the project assignments where it's actually the deliverable 1, 2, 3, 4. That's pretty clear. That's the order is pretty clear. But the course assignments were out of order. So I I noticed that some of you.
+not, you know. The folks on this
+who joined this lecture are probably not the ones, but some of you are working on the wrong assignment, and I just noticed that.
+So just look at the always look at the calendar, the calendar once it's put something as due
+that shouldn't change. I'm not gonna change it the Ti shouldn't either.
+And then you'll notice that some of the
+you know weeks nothing is due
+then that's on purpose. That's either to give you time to catch up.
+If you've fallen behind.
+Give you time to even work on the O overall course assignment
+with the architecture developing a model architecture and your presentation. So there's no reason why you can't be ahead of the game.
+you know, when you're when you're working on the the main course assignments, because you'll see that most of what we covered
+should take you through
+a big chunk of the of the deliverable that's due for this course.
+Right? So
+one thing, I also wanna point out that
+the next assignment is the architecture decision records
+for the architecture decision records to be
+to make sense, to actually be effective in communicating
+you should already have whether you've drawn it on a piece of paper, or whatever it is. You should already have an architecture
+where you think some choices or some decisions have to be made right.
+and then, within the context of your overall architecture, those adrs are actually gonna be may actually gonna make sense. So even though the Adrs are due before
+you share some of the architectures that's kind of on purpose to make you realize that once you're documenting an architecture, you actually have to go through the decision before you actually come to
+something that you want to share with with your you know various stakeholders.
+so make sure that your ads are not random, and then, when you have an architecture model that you're documenting and you're gonna share. And you're gonna present that the Adr is actually connect
+to the architecture you're gonna be doing?
+Go ahead. Zach.
+
+Zak Seipel
+00:05:41
+So just out of curiosity with the the adr. So, for example, I I maybe I've asked this before, but I I'm in 3 classes at once. So forgive me. So
+an adr would be something like, here's a diagram of using
+Kubernetes. Here's a diagram of using Lambdas.
+We're going to use lambdas because they don't have issues with cold starts. And here's the logic behind that. And that's really all those documents are. It's just those like.
+It's kind of the meetings that the Backend engineers would be having in their meeting notes. In a way.
+
+Mq Quraishi
+00:06:17
+That's a good example of an adr. Now, those those documents that you're talking about, you know it's great that you're gonna do that because that helps you
+actually get a lot of the detail in the Adr, because you don't want your Adr to be very high level either, because
+doing some of the design actually helps you document this because in some cases
+you may want one of your concerns could be performance. And I'm just using that as an example.
+And you, you would have had to actually document and and implement some Poc to get to that decision to say, Oh, you know.
+Xyz. Technique is too slow. We're gonna use land business right? And here's the reason. So
+your approach
+would be a perfectly valid approach.
+And it's not just the only one, but in my opinion, and you'll find it
+to be.
+you know. Accurate in most cases is
+an Adr. Has to follow
+some architecture that you're already documenting and trying out.
+It can't come before.
+
+Zak Seipel
+00:07:23
+Thank you.
+
+Mq Quraishi
+00:07:24
+Nice.
+So hopefully, the the labs are clear.
+And and you know, just stop me with questions as we go through this lecture.
+and we will get started. Now.
+alright. So let's talk about web architectures. Okay, so we're we're. You might have already seen a lot of this in your experiences. So a lot of this is gonna be
+pretty basic
+but the point of it is not to, you know.
+Talk about
+the web architectures in detail or
+pros and cons and things like that. But
+whether those pros and cons are clear, and how it was documented.
+the way they use the specific techniques. Was it clear? And
+you know, forwarding a point.
+a purpose, or making clear where the the architecture was headed.
+comparisons of different Architectures and things like that. Right? So
+it's it's not to really dive into detail of how web our web architectures work and things like that. But it's mostly about
+related. But in the context of this course, that that's how you should. That's how
+you need to view a lot of what we're going to go over today.
+So you know, the the progression is
+okay. First, it was Tcp, IP.
+To make sure. The networking in the 1960 s. You know which turned into the actual
+the first occurrences of what you know network computers look like, which is
+the, you know.
+which was the modern day Internet kind of evolved from.
+And then you talk about different web architectures, and you'll see that where we started versus where we are, it's a remarkable progression, right.
+and that has a lot to do with the advancements since
+Tim Burns, Tim Bernice did the
+you know the
+sort of the world Wide Web
+introduced it and talked yeah, and and went through a lot of
+the Http Https type protocols. And
+the 1 point O version of the protocol and how websites were built and
+a lot of that work started in
+what? 90, 95,
+or a little bit before that.
+you go back in time, and you look where we are. That's essentially where web 1.0 started, and then web 2 is where we are. There's a lot of some of the stuff that's out
+these days from the blockchain side is examples of web 3.0.
+But there's not a lot of adoption, and that standard is still emerging.
+So we'll review that
+the again, yeah, 1989, 1990,
+we, it actually took
+the, you know, even the Tim Bernersley wrote the proposal. It took him a while to eventually get his
+first
+website, or you know, Http, the protocol being utilized out in the real world.
+So he started in 1989, his proposal got accepted.
+And today we have Facebook and and Twitter and X, and whatever
+right? So it wasn't easy to get to where he got to
+but he found a way to communicate his approach.
+and how you wanted to document the various
+points in his architecture
+of it. You know.
+it got us to where we are today. So
+the progression was, hey, it's just 1 point oh to 1990.
+But the adoption really started. 993, maybe 95. You start. See, it really catch fire?
+But it was basic web pages. HTML,
+it was like the early form of Java and service that came out for the web website.
+It was like point 8 of Java that actually, I started working with servlets
+point 8, and the whole thing was you needed a plugin on the web server that wouldn't book a serble that wouldn't book a back end to get the data out to web pages.
+and then that evolved into web 2.0,
+where today you've got a lot of your social media using it.
+You have native
+native OS's running on phones.
+You have videos and
+high quality pictures.
+So you know.
+a lot of the web, 2.0 relies on high speed communications as well.
+and the fact that we can go from 1 one part of the world to another part of the world with quick access to the cloud. So web 2.0 includes a lot of that. A lot of those standards.
+And then you've seen we already see examples of the semantic web today.
+There's a ton of it out there. But with nfts and blockchain, a lot of that stuff. AI, it's all still evolving.
+But we're seeing examples of it already.
+So that's the web. 3.0. The interoperability, the AI part of it. The VR the AR meta versus
+you're already seeing examples of that. And that's how the web is evolving.
+The standard itself is eminent. That's what this slide means. And even though there's a ton of stuff out there. You can point as examples of rep 3.0
+it takes a long time for the standard to be adopted and and different entities to actually agree with those standards.
+So the read-only web architecture web 1.0 right? So you have a web browser makes a request to a web server.
+You have a file system
+that you know holds onto your Jpegs and gifts and HTML files to render the web page.
+There is no dynamic content, no interaction with the user. It's request and response. Right?
+Make a request. You get a response back.
+It's it is cacheable and and indexable. So then
+came the CGI part of the
+the webin. You know the the web architecture which is your common gateway interface.
+and this is to actually allow you to run scripts.
+This kind of evolved into some other mechanisms today, like the react framework and things.
+But CGI common, the the CGI's. They're just programs you could. These are the plugins. Even that can run on the web server that I was talking about can be written in CI used to write mine at C.
+And
+it's you know, it worked out pretty well, but it's not a scalable architecture, and it wasn't at the time, either, but it was the best thing you could do.
+And so Web Browser makes a request to the web server.
+You get your CGI script, providing, you know, whatever the web server is requesting getting the data from the database
+and providing it back to the web browser. Now, the thing that you want to. You want to. Look, here is
+the way the the this picture is communicating that level of detail. It's pretty high, level picture.
+It's boxes and arrows, but it gets the point across.
+and the audience here is just trying to
+th. This picture is meant for audiences that are just trying to understand.
+You know what? How the common gateway interface worked at a very high level? Right? So if you look at it from that perspective.
+you know.
+it's okay
+from, you know, whoever documented this it it this way. It seems to get the point across. But it's not your web architect. It's not your overall architecture diagram. It's probably one small component within it.
+The evolution of CGI, by the way, is Java service. Php, different web frameworks.
+If you've heard of the jangle framework
+will be on rails. Those are the evolution of
+what used to be CGI.
+so pretty
+pretty simple way of getting
+did you know, getting data into web forms. Right?
+So
+and
+so you should think of CGI as something that facilitates the communications between the web server and the backend.
+Then you get introduced to Javascript. Now, Javascript is something that's going to run on the web browser. So
+with this function.
+everything was still technically on the back end.
+So there was going to be performance implications. And so now the architecture evolves into.
+If you see the difference between the 2 pictures, the resource manager does most of the work here.
+but then, now you
+give some of that to your Javascript engine to to do on the web browser side.
+And so your web browser all of a sudden gets
+smarter, because now it can run code
+on your, you know, on every user's web browser. So essentially, you've taken a lot of the web server workload and shifted it to the client.
+So you can look at it as workload sharing, or you can also look at it as
+getting your web pages to be more dynamic now.
+and and the fact that
+you're you're able to now
+run code on the client side which will communicate with the
+the back end through CGI scripts. So
+another evolution. So between 1.0 and just minor Revs. Of the web architecture.
+You're not seeing
+how it's evolving and evolving very quickly.
+So just in 4 years you went from so where you started from, where it was just a simple
+browser calls the web server. You get some data back you've you've now come to an engine running on the web browser on the web server, and you've taken the CGI part and converted it into
+an entire application server. Right? So you could you now have the ability
+to an Apache tomcat is the example of that. And you now have the ability to run
+a lot of complicated logic.
+and you know and do a lot better with Java code and other things on the application server side.
+And so, you know.
+you've now evolved your architecture. It's
+become more dynamic in nature.
+and if you go back from a depiction of
+architecture, model perspective, you still have the essentially the same number of boxes.
+but you're able to now communicate a lot more.
+By documenting specific areas. So this is a high level communication of how your architecture is evolving
+your next level architecture picture would be as you go deeper into how the application server works, and you would break that out.
+and then maybe you go into your database and see how that breaks out.
+or the Web Server architecture. As to you know how that's gonna get communicated.
+But at a very high level you're able to. Now talk about that. My entire application. Lifecycle is within the web app.
+And you've gone from a single threaded app potentially
+with a lot of state to multi-threading.
+And now the model view controller framework. Right? So in one of our previous lectures, we talked about
+we talked about Mbc. And how it worked.
+So this is essentially now taking the application server and getting down to the point of
+Hey, I'm gonna take a lot of my
+code that's running.
+and I'm going to shift it into
+the web browser is where the view is essentially.
+and the view is going to communicate with my model.
+And there's a controller which is running in your application server side. Right? So in this case
+all the actions go to the controller. The controller looks at the model
+and the model updates the view or refreshes the view.
+So there are still issues with the Nbc framework, and you'll see, as this architecture involves is going to evolve into something that can scale better
+and flux. The flux pattern is going to be an example of that that I'll talk about in a few minutes.
+That's gonna help make this architecture, or you know the execution of a lot of this code
+even more efficient. But you've now taken the fact that with the Nbc and model view Controller pattern. You have modularized your service. I code.
+You can run larger applications, have many models.
+Maybe a few controllers, many views.
+and you replaced HTML
+with markup files for the deal. So
+they're pre-compiled
+for speed and based on configurations of your of the various components, you can actually alter the behavior. So you now have a lot more dynamic
+a control.
+There's more dynamic dynamicity to your that's a word to your application. And you know, and you you provide
+configuration based
+code execution. Right? So you take out all of the
+hard coded items from the previous examples, and you put them in configuration files for the structs pattern.
+So if you ever wanted.
+if you want to know more details about Apache struts, I haven't worked with it in a while.
+but that's one way where a lot of the
+configuration, a lot of what controls and drives and configures your application server is externalized into files
+so so that you can have
+deployments specific to your configuration.
+So that's one way
+I'm gonna shut off my camera because I think my network is starting to slow down.
+Okay?
+So anyway. So the so it's it's considered an improvement. But it's also a challenge. Because now you have
+configuration files controlling how your code executes.
+But as your application gets.
+you know, more complex, these configuration files
+become very hard to manage.
+So anyway. So
+web 1.0
+has existed for 15 years all the way up to 2,005. It's where it started, was read-only content.
+And now it can support, you know, reasonable size applications, and that can scale and have web architecture, you know, support basic web architectures. We introduced a model view controller pattern through that
+for develop, you know, for developing web centric applications. But then.
+you know, it was still missing a ton of stuff that we wanted to do.
+And so.
+starting in 2,005, 2,006, the
+pattern or the architecture started to shift to the web 2.0 side.
+So
+this model was.
+hey? A ton of the work is being done by the web server and the web application. There's too many layers in between
+which complicates the architecture. How can we simplify it?
+Well, you
+you've enhanced your standards now with web 2.0, to actually allow you to run your entire application or part of your application
+itself on mobile devices or the browser
+and with Internet of things. So you've you're now getting to
+an application that's split between many layers to potentially running all in the front end client side.
+and with the data and some of the Api calls happening in the back end.
+So this was quite the shift
+in 2,005, 2,006, and you now see with the Vrs. And where we are with.
+all the all the different applications that have been built since then.
+how web 2.0 actually assisted with a lot of that. So
+a lot of.
+as we know in in technology space or the software space, a lot of
+the the advancements come from some concept that was in the works that provided you know.
+a step forward, or provided an evolution from from one set of
+components or architecture to a more advanced, and in this case it was Xml. Http request Xhdr. Which Microsoft developed
+for their Internet explorer.
+But
+what ended up happening was Google ended up seeing
+a completely different usage for Xml over Http
+And what they decided to do was they decided to create some Javascript libraries that were compatible with it, which then led to Gmail and Google Maps.
+And
+what ends up happening with this is
+this ends up becoming the enabler for web 2.0. Because then that allows you to shift the client
+or a lot of your code running to native
+operating systems like Ios or Android right? Which then allows that evolution to occur.
+So the the shift here is.
+The last thing we looked at was the model view controller was running on the application server and our web.
+One dot 4
+was, you know, reaching its probably tipping point. So how do we? How do we move forward from that, or get to web 2 point over the XHTR.
+Oops. I think I'm
+my slides cut
+shift it somehow. Sorry about that.
+So what you
+what you what you look over here is
+you're all of a sudden now. I don't know if you're familiar with Ajax, but it's an asynchronous javascript, and that's what it stands for. But what Ajax allows you to do is
+What you see on Facebook today is, in my opinion, an evolution of something like an Ajax, because.
+what you see is, there's many components running on your page.
+and either before you interact with them or as you're interacting with them, they update or refresh themselves. And that's a that's like a
+one thing about Ajax, right? So what Ajax is actually allowing you to do is
+is actually have. You're. You're actually behind the scenes reading data
+from
+a back end system or a web server
+after the web page has loaded. So if you have many components on the web page.
+In the past. It used to take a long time for the page to like even load, because it's trying to get all the data and refresh every segment of the web page.
+Well, what if you only brought the data back? If a user interacted with a specific part of the web page.
+Right? So
+you you wanted then the ability to actually update the page without reloading the page, but only loading the segment of the page that was updated.
+So what Ajax allows you to do is to as you interact with. If you have a web page with 4 components on it, and you're looking at your profile information. And the next component is I don't know your account information until you interact with it. The account information part of the web page. It's not gonna go get that data.
+And so as you're interacting with it, it's gonna send a request behind the scenes to go get that data and populate that segment of the web page. That's essentially what
+Ajax is allowing you to do.
+But it's using
+the X Hdr.
+you know thing that Microsoft ended up developing in 90, 90,
+90, 98, or something like that. So
+what ends up happening now is your browser is running
+these callbacks.
+So when you have a user interface, you interact something.
+This is all still running on the browser.
+And the browser does these callbacks to say, I'm gonna go get the data from the server side. And when I have received the data, I'm gonna call back to the user interface.
+So it's using an Async architecture
+to
+wait to get the data. But then, as soon as it's requested to get the data, it receives
+the function to call back to
+once the data is received so pretty pretty cool. This was like, I still remember when Ajax came out, this was like the the hottest thing, because it allowed us to do this
+interaction behind the scenes, and have
+an entire client loaded, and to our, you know, and presented to our users, to
+which didn't take 15 s to load.
+but all of a sudden, in a second you see everything, and then
+every other segment of the web page is actually refreshed
+when
+when when a user interacts with it. So again that you see 2 different ways of communicating this on this page.
+one picture, allow one picture showing you the main components without diving too much deeper into it.
+It's talking about
+the type of calls that are being made and the data that's being returned, and it's also portraying a sequenced in the diagram on the left
+and the one on the right.
+It looks like an activity diagram. But you know, maybe it is. It's not really
+following the Uml standard.
+but it's communicating to us that the web browser makes an Http request.
+The there's a Webexml server that
+is all meant for backend processing and accesses the database.
+It actually returns to your HTML page with Javascript, your style sheets
+and your Ajax engine on it. And then, as you interact with the web page.
+you communicate with an Ajax engine
+that makes a request, gets the data and posts it to your HTML page.
+So at a high level, it's able to communicate how a single page architecture is working.
+This is not exactly a single page architecture, but a single spas are
+based on this, this type of an architecture.
+So what is being enabled by web 2.0 compared to
+web 1 point? Oh, so we went from static web pages
+where you would go to a user's website. And they'll talk about all the things that they do like. Maybe it's a company's website, static content
+web. 1 point will then evolve into allowing you with dynamic content.
+And now you go to Web 2.0. It's allowing you to run full-featured applications using web protocols.
+And it's has multiple clients. So it's mobile apps. IoT devices right?
+So the the evolution is pretty significant with Web 2. Which is why we stayed with Web 2 for
+quite a number of years
+until we saw Web 3.0 present itself to us just a couple years ago.
+So web 2.0
+underlying. So it it we went from 1 point O. Was Http 1.0 to Http 2 and so you're able to now have different type of payloads as well with Http 2. And you also have Mqtt. Which is a protocol used to communicate with IoT devices embedded within your web. 2 point application. So
+we're gonna we're gonna get into that a little bit. But
+it's it's about you doing useful things over the web.
+right? It allows it allows us to do that. Just look at what we can do on our mobile phones today. This was made possible in 2,006, with the evolution of web 2.0. And we've come quite a long ways.
+and in 2,005.
+The architecture became all of a sudden pretty, significant and complex.
+Again, not as complex as what we can see with the cloud architectures these days.
+but it's still pretty. It's still something right? So you have many new components here. You have a content provider
+which
+your browser can download application code, either by the web server or content delivery network. So a cloud Cdn or a content delivery network is essentially about providing you content quicker
+caching it for you. So Cdns
+today's cloud uses quite a bit of Cdn, so your application can be deployed in the Us. But using Cdn, you can actually have a front end running in. For instance.
+I don't know China.
+So it doesn't have to reach out to your application running in the us because you've cashed all the client code
+in China to make the application faster. Right? So
+content. Distribution network is an example. What I just talked about is an example of a content distribution network. So
+the what this architecture allows us to do is
+we kind of have to download the application.
+And once it's downloaded and and executed.
+the whole thing can run in your web, Browser. The application will make requests
+over Acdp, using Apis now
+going through still the Ajax framework.
+So
+with 2.0
+the introduction of
+web application firewalls, but
+aws and other clouds called waf
+lovingly. It's meant for security. So you capture a lot of your firewall rules to
+prevent denial of service attacks to talk into, only allow certain proxies to be able to communicate with your Apis. So that's where a lot of the rules are captured. So before you can even get to your Api gateway.
+you're going through a ton of security.
+But in this case there's still challenges. But look at the advancement from the previous pictures to this one, where you have
+your web browser, and your content is distributed in the cloud.
+And then you have your dynamic part of the application communicating with Apis
+to
+go get data to present. You know, whatever
+a component the user is interacting with.
+But it's all controlled by the firewall. So one is using Xml and Json and the other is downloading content.
+Quite a significant improvement between
+evolution between 1 point where 1 point of stop with the dynamic applications to where 2.0,
+you know is is going up to.
+So now this is where it evolves into. You cannot. You can almost see it that we're headed towards with Ajax. We're headed towards the single page. Application architecture. You know your Facebooks
+or your Twitter, which are considered Sp is because everything is there, and as you scroll, the content refreshes. For you know, depending on what what the apps are doing
+and what your special
+configurations are, and what your and the content is geared towards the user itself, based on what they've done in the past.
+So there's a lot of
+personalization. There's a lot of
+dynamic
+content that you can interact with based on your personalization.
+So the evolution for that 2 has given us from 2,006
+or even up until today. Right? So
+IoT devices are very popular. We have many ways to, you know, connect
+different components using Bluetooth and other protocols.
+So it's just sort of
+allowed us to scale
+our web architecture, you know, 10 fold. So it's almost like we we want the old simple days to come back. It's gotten so complex now, right? But it's also rich
+and it
+allows for
+user interactions, the likes of which we hadn't seen
+when it first started. So the monetization is where a lot of these ideas and development actually come from is
+it starts with, how can we get more? How can we get more people to log in to? How can we monetize what they're doing?
+How can we sell them products as they get in based on
+what they've been using? So that's the web 3.0 semantic
+site creeping in to what we do today in the web. 2.0 architecture, even though semantic web
+falls under web 3 point. Oh.
+you see it in web 2 deployments today. Right? So there's a mixed bag. But the the evolution of Web 2 is eventually taking us into what the web 3 point is gonna be which is still in the works like I mentioned. So a single page application
+we'll get into the different frameworks that allow you to do that in a in a bit. But
+you can see that the architecture still boxes and lines.
+It's added a lot more components. It added security. So you can actually dive into how your web application firewall works.
+But at least it's telling you that you have certain requirements that your single-page application has to go through a firewall to communicate with the Apis.
+Your mobile apps will do the same thing. So your Apis now are servicing multiple clients, and your IoT devices are doing it. So the context of the call drives what the Api runtime returns and which servers you're communicating with as well
+the low power arrow here is indicating just essentially using some of the other protocols like Bluetooth.
+So this is the introduction of iphones android phones.
+angular
+and other frameworks.
+Any questions so far?
+Okay?
+And
+so at a high level web 1.0 was about delivering rich content
+and web 2.0 ends up becoming, you know, how do we do useful things on the Internet?
+And so.
+what you've done is
+the architecture, the application code. You've evolved your architecture to say my application code. I want to find ways to run it on the client. So Facebook, as an example of that, is running on a browser, on my
+laptop or my desktop. So there's code running that was delivered to me by Facebook, right? So your applications are running
+locally on the client.
+So it allows. You know, even though the servers
+and the volume of servers on the on the Facebook network or or their data center is still, or the cloud is still pretty
+large. What they've also done is included me, my desktop, my client, into the mix
+because the application code is running locally
+as well.
+and your Apis end up supporting all of your data interactions and your remote interactions.
+So single page applications, right? So
+you. When I was talking about Ajax, I talked about various components on the web page.
+refreshing or getting more data as I interacted with them. Or I scrolled.
+So
+sp is are, were actually, you could see that this is how
+we're going to go from
+application running Ajax to a single page. Application. Because now you can actually have
+when you go to any
+application used today, like, you know
+X, or Facebook or Instagram, or whatever some of the components are even ads, and those ads are based on
+who you are, where you are from, like where you're logging in from and also where where you're from. If it's looking at the things you'd like to browse.
+A lot of that specialization and monetization comes from a lot of these components. So your web browser is focusing on the security is laying out the different. It's laying out the style of the page right?
+And it's going to use your PC. To store things, and it's got a Javascript engineage and your actual web pages, where all the components are
+and the web components are.
+you know could be.
+Every component has its own style. Look and feel
+you could be coded in Javascript or tyscript, which will manage the behavior. And then there's eventing framework behind the scenes
+that components can talk to each other or
+or other backend systems.
+So what this ends up looking like is.
+So if you look at just the pictures and what they were communicating.
+This one is trying to explain to us
+how Sps work right? So
+this is essentially communicating with specific stakeholders. If you were documenting the evolution of web architectures.
+This is one of those
+slides that maybe is used once or twice.
+but it it goes into explaining your more detailed architecture that you're going to be sharing soon. Right? So this is not necessarily an architecture picture. This is that this is a very high, level way of explaining to people what they're gonna see in your more complex architecture diagram
+which I'll share towards the end.
+This is a very high level architecture diagram where you can dive into each component and not just each component, like, you know, spa tooling. But you can go down to
+you can drill deeper into the libraries, part of it, or the packaging part of it go down into deeper into how the event manager works within the spa framework.
+But this is, you know, by communicating that. But this slide is actually telling us that
+sbs can be very complicated right, and
+they have become more and more complicated over the years. So if you work with react or angular.
+I haven't worked with skeld
+our view. But if we work with reactor angular, you'll know what I'm talking about with
+the evolution of single page. Applications are
+react is a good example of that.
+So these are event driven so the event can be
+any type of interaction.
+It it could be time-based.
+It could be focus, based as you scroll through, or it could be some, you know, click events right?
+So it could be any type.
+And the way the way this is gonna work is, you're gonna have events that have to go over a network.
+You have to have
+a way to store, state
+what you were looking at where you were, and then
+something that interacts with your with your backend.
+and the components can talk to each other as well.
+So, diving a little bit deeper into how components talk.
+This is where we're gonna get into
+various
+different component interaction models. So if we talk about
+in this case, we're starting with
+the callback which I referenced earlier is
+callbacks are essentially functions that you
+to other functions as arguments.
+And when
+the function you're calling completes.
+you're essentially giving it a way to call back to the parent. So a parent calls a child component
+tells the child component. When you're done, call this function and tell me your state.
+Was it successful? Did you finish? Was there a failure?
+Callback is a pretty common way.
+A lot of components interact with each other.
+and
+in an Sba
+architecture. That's essentially how a parent component talks to a child.
+This is another example
+of
+how the you know, the essentially the callback works in the
+the Javascript runtime libraries.
+So the next evolution of callbacks was the promise model.
+So promises are essentially
+so with Callback. What what could end up happening is
+there was this hell issue there was referred to as an hell issue, and that essentially, that essentially meant that
+you could have many
+callbacks occurring.
+and every callback has to get a response back to the parent
+you could.
+So your nesting could be so deep
+that
+your code becomes hard to maintain and debug, because there's too many
+callbacks. So a function is going to get a call back and another one is going to get a call back. Another one is going to get a call back, and by the time you complete the chain anything could happen in that
+stack of calls that you've initiated.
+so that the promise model was meant to resolve that
+which essentially
+your promises an object where.
+when
+it completes
+it has a way to represent a failure state, and it's all done asynchronously.
+So in this code, you're essentially just it's just more structured to handle the asynchronous code.
+and you're just chaining everything. If something happens, then
+something, then do something otherwise catch something else.
+So to log errors. So this is just sort of
+making it so that
+you have a good way to return errors.
+says Asynchronous, calls with promising, which this then evolves into
+a much better, which is more commonly and widely used now
+is the asing away.
+which is a evolution of the promises.
+Body?
+it. Could the promises code could the promise code could get very tricky because.
+you're writing a lot of Async code, and it gets hard to debug or even maintain.
+And what Async await allows us to do
+is essentially built on top of promise to.
+So you're writing synchronous code
+that the style is writing synthes code. But it's actually Async.
+the way it works. And what you're essentially saying is.
+Hey, I'm gonna
+do a function make a call.
+But I'm gonna also wait
+for the function to complete. Right? So it sounds like it's synchronous, but it's actually executing in an asynchronous way. It's just syntactic sugar for your promise
+code.
+It looks and behaves like Sinkford. But it really isn't
+so what what you're now doing is you're using the function await
+to wait or to pause your execution until the promise completes.
+So when you have many Async operations. This is where it comes in handy.
+What does all of this have to do with so
+with any of this right? So we, I referred to flux that Facebook uses
+the beginning flux is an evolution of the model view controller pattern. And
+it actually uses
+a lot of the Async awaid
+features. Right? So
+this is essentially the model view controller. You could
+really go into a tailspin with too many models communicating with too many views.
+And what this allows us to do is to store the state
+in this in what's referred to as a store.
+The dispatcher tells the actions what to do, based on the interactions with the views. And so you've sort of split everything up.
+Yeah, Facebook uses this model
+to actually solve a lot of the model view controller stack, stacking problems with too many calls, too many models, interacting with too many views which becomes hard to debug
+and manage over time.
+This is a pretty common pattern.
+So instead of using Mvc, a lot of people use this, we talked about Nbc and
+our last lecture and the previous lecture.
+Okay? So rep 2, right? So this is what I was talking about, how it's evolved. So when we talk about
+when we're talking about cloud
+native architectures.
+that's essentially
+where we are today. When we when we do a lot of our architectures in the cloud, whether it's aws or azure or Google
+but what you've done now is give. Give you the ability of using mobile apps.
+browsers. IoT's
+with all the security in place
+to go through all the firewalls, put in an Api gateway.
+This is essentially the Kubernetes model. But
+have an Api, you know.
+Api gateway that has either Apis into your data Apis into your
+specific application features. Everything is managed through configurations.
+So web 2 allows us to, has allowed us to get this complex with our
+web native architectures.
+I'm not going to jump through a lot of what the components were here, but
+it's pretty. So you know, when you go into it. This is just talking about the various
+areas of concern, whether it's network, whether it's authentication.
+How do you prevent your data from
+getting.
+you know, if you're not encrypting it. Somebody could actually read what data is on the wire. So how do you make sure that you
+send the data secure, but at the same time
+isolate suspicious traffic with your own traffic
+and make sure that each component is interacting with a component in the network. That's part of your network and not part of somebody else's network.
+And I talked about the the waf
+to put a lot of the security in place for things like denial service attack and SQL. Injection and other things. So that's essentially your firewall.
+Alright. So
+we're not. So we transition from 1.0 to 2.0. So now we're going to transition to 3.0
+It may still be too early to talk about 3.0 in detail. But, like I said, you already seen
+a ton of examples of 3.0
+actually out
+and you can interact with it today, whether it's AI
+or the VR stuff.
+That a lot of the vendors are doing out from the web
+these days, and blockchain is an example of that, too.
+So
+from
+the what? What ended up happening with web web 2.0 is we saw
+the Googles, the Facebook, Netflix Amazon. All of these guys take advantage and help us evolve the web. 2. Architecture.
+And you saw all the the evolution on the banks, the insurance companies in entertainment providers how they got pretty creative with their Apis
+to support many different front ends. So you can have your bank application work on a make mobile phone, or a browser, or or anything else.
+Even your watches these days. Right so. And some of that could be over Bluetooth
+when you approach
+a device that detects you through your watch right? There's there's stuff like that where a lot of these quick communications are happening. And this all made possible by the evolution of the web 2.0
+architecture.
+So let's we haven't talked about security.
+So let's talk about security quickly, like how every everything was authenticated and authorized, based on proxy servers and Ldap credentials
+and the past to all right. So in the past you would provide a user Id and a password.
+It would check your credentials in an Ldap store
+come back and say, Hey, I know who you are. And then when you make the call to access something.
+it it makes sure that
+you are who you are by authorizing you, and then allows you to access the Api.
+Then you always have public Apis that unauthenticated users can access. This is not the most secure way to do things.
+It's user id password driven. You're even sharing it in your header, which makes it. You know something that can be breached very easily.
+So you, kinda you know, there's a weakness here, right? That's what this slide is talking about.
+But
+and weakness in many fronts.
+So that kind of led us to the, you know, evolution of that model
+to the oat model.
+So still using it today.
+It's all token based
+or this mostly meant for authorizations. There is a level of authentication that gets you into the guests you to first go get your token, and then that token is used to
+Then that token is used to authorize you to get to resources.
+And so it's tamperproof.
+It's a widely used protocol.
+It's very fast.
+very efficient, and very secure.
+And so how does the oat model work? Well.
+this picture is now communicating many different perspectives. Right? So first, let's talk about that
+is talking about the the components that are interacting. You have a client. You have an Api gateway. You have an Api gateway that lets you get at the specific Apis
+running on web services, some web services platform, and then you have your identity provider that has
+the ability to authenticate you.
+and then also give you the appropriate tokens that you can that can then be used to actually
+authorize you to get to the resources.
+So your client is requesting.
+all 2.0, you know all 2 point requests are initiated by the client. So whether it's a mobile app.
+Whether it's your smart TV
+or your desktop, you have to initiate a request to get a token
+and when the client requests authorization.
+you're supplying your client Id, and a secret.
+And that's gonna get you redirected to a Uri which will send you to the
+token provider which gets you. So the authorization authorization server is the one that authenticates you, and once it verifies who you are.
+and
+it also knows what the scope of your authorization is going to be. So that token issue to you is gonna have
+that, you know, is going to have that information where you can now interact with the authorization server to get your access. Granted
+the authorization server.
+once it has a token, redirects you back to
+the client with the token, and now you can.
+depending on the type of token was given to you. By the way, the token has a time limit, right?
+And so
+how often you need the token needs to be refreshed, or when it will expire. The token is then something that that allows you to get to your web services. Apis, for instance.
+But this architecture picture is fairly detailed. It could be viewed as a detailed
+architecture diagram for one of the components
+on the previous pictures around Web Server. Web server security
+so
+pretty well documented. It's got a sequence in it without actually doing an activity diagram. It's able to portray between the components.
+the interactions, you know, login request.
+you get a response. You're redirected.
+The redirected thing like I was saying before just takes you
+to your authorization gets you the token. So the sequence
+from one to 11 is a 12 is depicted here.
+So it's a pretty good way to communicate multiple levels.
+Component interaction sequence of calls
+what the use? Cases that you that this helps you solve
+essentially getting token for authorizations and authentication at the same time.
+Okay, so between
+picture one.
+I'll pause here
+and picture 2.
+Do you see where the optimization was? It's pretty. It's pretty easy.
+It's just essentially
+where there was a secure proxy to
+cache to respond. It wasn't caching it.
+So now you have a public, your keys are cached, so the next time a request comes in you don't have to go back to the identity provider, because if the token is still valid, you can go get it pretty quickly.
+So again, the picture is pretty detailed.
+This is an evolution. So you may have an architecture diagram that you're communicating with your audience or your stakeholders.
+and you have another release coming up, because
+stuff is slow.
+You're communicating that through this architectural picture which even your engineers can understand and implement
+alright. So web 3 point up right? So it's it's almost like what's next. But
+some of it is already there.
+So your semantic web will be replaced. So
+web 2 side right. Your semantic web will replace will be replaced by Aiml models.
+Defined information with deep personalization and relevance to you based on your context.
+When we're at a point between web 2.0 and web 3.0.
+You can see some of this transition happening
+where
+a lot of times you need
+actual hardware to connect things.
+But
+we're gonna have to find a way to connect things
+based on maybe your presence.
+So it's almost like saying the web is everywhere without having to have some kind of software deployed somewhere. A hardware deployed somewhere.
+There's an example of that.
+That we'll we'll see in a second. But the
+it's all about decentralizing your communication as well. So you can see the pain points in 2.0 architecture that the evolution of 3.0 is come is trying to resolve. Now.
+one of the thing is going to be
+it's
+is essentially without having to authorize every layer. How do we trust someone.
+based on component interactions per se, right? That's your blockchain side of things. So
+it's it's improving your security architecture. It's removing a lot of the restrictions of specific software running of specific hardware components.
+And and so.
+you know.
+the web 3 point architecture is going to focus on. On on a lot of that.
+So essentially the restrictions that we have today.
+There's some use case that we're gonna run through. But I I it's gonna lead us to
+And I, you know I can let you guys go through this if you're interested. But this essentially in Web 2.0,
+how do you get an authorization from from a healthcare company, and who's involved, and how many pieces are interacting to give you that prior OP
+versus
+and the component. This the healthcare back end systems
+which there's too many of them, too many networks, too many different software pieces to communicate with.
+We want to turn that into a black box. So now that's removing the restriction of specific hardware specific software with blockchain.
+And so
+I don't see many examples of that
+today. But you know
+there are. I guess there are some some things that web 3.0 is going to introduce to us over time.
+so this is where I kind of wanted to pause this lecture, because I think it gets into too much explaining too much blockchain. There's another lecture that Brian and I are talking about replacing with
+some data specific lecture.
+which is coming towards the last last couple of lectures. So
+if we don't, then the blockchain
+lab is, or the slides are gonna talk. Get into a lot more of that detail.
+But
+I don't know any questions. So there's a lot of the, you know, fungibles are not even a real thing anymore, in my opinion. So
+the the slides are a little dated on this side. That's why, I said, this lecture is gonna be a bit short.
+So I wanted to pause there. See if you guys had questions.
+About this about the next lab.
+
+Zak Seipel
+01:00:27
+I guess the only question I would have is
+I was looking at. So there's one more paper. It looks like the the one on firecracker
+at this point. Is there anything that we'd be missing if I wanted to start on that like today?
+From our lectures and things like that.
+
+Mq Quraishi
+01:00:44
+I don't think so. Think you can start on it.
+The Youtube videos or the
+the talk is pretty
+details. You can start on it standalone.
+So, but the next step that's due is the software architectures code. I believe.
+
+Zak Seipel
+01:01:00
+Yup, Yup, I already got that taken care of. I just wanted to check on the next one. Thank you.
+
+Mq Quraishi
+01:01:07
+Alright, folks, I said it was. Gonna be a short lecture that it is.
+Thank you for attending good luck with your labs, as usual.
+You can reach me at discord or send me an email with questions hopefully. I've addressable. I know I haven't gotten back to you on the spark thing yet
+so hopefully, by the end of this course, I'll give you enough detail.
+It's just hard to collect all of that and then send it. But I'll do that still. Some. My list of things to do.
+
+Zak Seipel
+01:01:34
+No, don't, no, no rush on that. I've got plenty of other rust related things I need time taking care of right now, anyways. So thank you.
+
+Mq Quraishi
+01:01:41
+No worries, thank you.
+Alright. I'll see you guys next week. Good luck with everything.
+
+Saima Islam
+01:01:49
+Thank you. Bye.

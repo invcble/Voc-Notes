@@ -16,7 +16,7 @@ audio_queue = []
 def audio_callback(indata, frames, time, status):
     audio_queue.append(indata.copy())
 
-stream = sd.InputStream(callback=audio_callback, samplerate=fs, channels=2)
+stream = sd.InputStream(callback=audio_callback, samplerate=fs, channels=1)
 
 while True:
     command = input("Recording start/stop: ").lower()
