@@ -19,3 +19,7 @@ This flow represents a comprehensive system for transforming live lecture audio 
 $300 credit
 Google Speech-to-Text V1 API || $0.024 per minute
 https://cloud.google.com/speech-to-text?hl=en
+
+implement upload audio.
+
+https://console.groq.com/docs/models
