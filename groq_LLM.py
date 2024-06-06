@@ -13,8 +13,8 @@ max_token_length = 5000
 split_lecture = [lecture[i : i + max_token_length] for i in range(0, len(lecture), max_token_length)]
 generated_response = []
 
-for each in split_lecture:
-    assistant_content = ''
+for i in range(len(split_lecture)-1):
+    # assistant_content = ''
 
     complete_chat = Client.chat.completions.create(
         messages=[
@@ -25,12 +25,12 @@ for each in split_lecture:
             },
             {
                 "role": "user",
-                "content": each
+                "content": split_lecture[i]
 
             },
             {
-                "role": "assistant",
-                "content": assistant_content
+                "role": "user",
+                "content": split_lecture[i+1]
 
             }
         ],
@@ -38,15 +38,15 @@ for each in split_lecture:
         temperature=0
     )
 
-    assistant_content = complete_chat.choices[0].message.content
-    # generated_response.append(complete_chat.choices[0].message.content)
+    # assistant_content = complete_chat.choices[0].message.content
+    generated_response.append(complete_chat.choices[0].message.content)
     # time.sleep(1)
 
 # print(generated_response)
 
-# with open('Groq_ClassNote.md', 'w') as f:
-#     for each in generated_response:
-#         f.write('\n\n\n\n'+each)
-
 with open('Groq_ClassNote2.md', 'w') as f:
-    f.write(assistant_content)
+    for each in generated_response:
+        f.write('\n\n\n\n'+each)
+
+# with open('Groq_ClassNote2.md', 'w') as f:
+#     f.write(assistant_content)
