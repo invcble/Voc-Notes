@@ -39,19 +39,13 @@ for i in range(0, len(split_lecture)-1, 2):
     generated_response += '\n\n\n'+ note_chunks.choices[0].message.content
 
 
-# with open('Groq_ClassNote2.md', 'w') as f:
-#     for each in generated_response:
-#         f.write('\n\n\n\n'+each)
-
-# with open('Groq_ClassNote2.md', 'w') as f:
-#     f.write(assistant_content)
 print("Generated chunk sizes", len(generated_response))
 
 final_note = Client.chat.completions.create(
         messages=[
             {
                 "role": "system",
-                "content": "Can you please make the following a bit more cohorent and consistent, organize the details, use markdown format"
+                "content": "Can you please make the following a bit more cohorent and consistent, organize the details, remove duplicates, use markdown format"
 
             },
             {
@@ -64,7 +58,6 @@ final_note = Client.chat.completions.create(
         temperature=0
     )
 
-    # generated_response.append(complete_chat.choices[0].message.content)
 
 print("Generated final size", len(final_note.choices[0].message.content))
 
