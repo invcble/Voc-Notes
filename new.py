@@ -35,4 +35,7 @@ complete_chat = Client.chat.completions.create(
     temperature=0
 )
 
-print(complete_chat.choices[0].message.content)
+print(str(text))
+
+with open('Groq_ClassNote.md', 'w') as f:
+    f.write(complete_chat.choices[0].message.content)
