@@ -1,111 +1,153 @@
-Web Architecture Evolution
-=========================
+Web Architectures
+===============
 
-The lecture begins with an overview of the evolution of web architectures, starting from TCP/IP in the 1960s, which laid the foundation for networked computers and the modern-day Internet. The instructor then discusses the progression from Web 1.0 to Web 2.0 and the emerging Web 3.0, focusing on the context of this course and the importance of clear documentation and communication of architectural choices.
+Web architectures have evolved significantly over time, starting from TCP/IP in the 1960s, which laid the foundation for network computers. This eventually evolved into the modern-day Internet. The progression of web architectures has been remarkable, with significant advancements since Tim Berners-Lee introduced the World Wide Web in 1989.
 
-Web 1.0 (1990)
---------------
+Web architectures have evolved through several stages:
 
-* Introduction of HTTP, HTML, and the World Wide Web by Tim Berners-Lee
-* Basic web pages using HTML and early forms of Java
-* Web 1.0 relied on point-to-point communication between web browsers and web servers
+- **Web 1.0 (1990):** A read-only web architecture where a web browser made a request to a web server, and a file system held onto Jpegs, Gifs, and HTML files to render the web page. There was no dynamic content or interaction with the user, and it was cacheable and indexable.
 
-Web 2.0 (1995-Present)
------------------------
+- **Web 2.0 (Present):** A read-write web architecture where web pages could interact with users and provide dynamic content. This was made possible through the introduction of Common Gateway Interface (CGI), which allowed the running of scripts.
 
-* High-speed communications and native OSs on phones
-* Social media, videos, high-quality pictures, and interactive web applications
-* Interoperability, AI, VR, and AR examples are emerging in Web 3.0
+- **Web 3.0 (Emerging):** Also known as the semantic web, Web 3.0 is an extension of Web 2.0 that includes blockchain, AI, VR, and AR. It aims to create a web that understands and responds to user needs by providing personalized, dynamic content based on user behavior and preferences.
 
-Web 3.0 (Emerging Standard)
-----------------------------
+Common Gateway Interface (CGI)
+------------------------------
 
-* Semantic web, NFTs, blockchain, and AI
-* Interoperability, AI, VR, and AR are key features
-* Standards take time to be adopted and agreed upon by different entities
+CGI is a standard protocol that enables a web server to run programs and scripts in order to generate dynamic content. CGI scripts can be written in various programming languages such as C, C++, Perl, and Python. However, CGI has some limitations, such as performance issues, as it creates a new process for each request, making it not suitable for high-traffic websites.
 
-### Read-only web architecture (Web 1.0)
+The evolution of CGI led to the development of Java servlets, PHP, and various web frameworks such as Ruby on Rails, Django, and AngularJS. These technologies provide a more scalable and efficient way of generating dynamic content compared to CGI.
 
-The read-only web architecture (Web 1.0) consists of a web browser making a request to a web server, with the web server responding with content from a file system. The architecture is simple, but it served as the foundation for the more complex and interactive web applications we see today.
+RESTful Web Services
+------------------
 
-### Read-write web architecture (Web 2.0)
+REST stands for Representational State Transfer, and it is a software architectural style that defines a set of constraints to be used for creating web services. RESTful web services are stateless, meaning that each HTTP request from a client to a server must contain all the information needed to understand and process the request. The server will not store anything about the latest HTTP request the client made. Each request from any client contains all the information the server needs to service the request.
 
-In the next section, the lecture will discuss the read-write web architecture (Web 2.0) and its components.
+RESTful web services use HTTP methods to perform CRUD operations. CRUD stands for Create, Read, Update, and Delete. The four HTTP methods used to perform CRUD operations are POST, GET, PUT, and DELETE.
 
----
+- **POST:** Used to create new resources.
+- **GET:** Used to retrieve resources.
+- **PUT:** Used to update resources.
+- **DELETE:** Used to delete resources.
 
-Class-Note: Web Architecture and Evolution of CGI
-=================================================
+RESTful web services also use URIs to identify resources. URIs stand for Uniform Resource Identifiers. A URI is a string of characters that unambiguously identifies a particular resource on the Internet.
 
-Web Architecture and Evolution of CGI
+In summary, web architectures have evolved significantly over time. RESTful web services are a software architectural style that defines a set of constraints to be used for creating web services. RESTful web services are stateless, use HTTP methods to perform CRUD operations, and use URIs to identify resources.
+
+CGI Framework and Web Architecture Evolution
+=============================================
+
+Introduction
+------------
+
+Common Gateway Interface (CGI) is a standard protocol that enables a web server to run programs and scripts in order to generate dynamic content. CGI scripts can be written in various programming languages such as C, C++, Perl, and Python. However, CGI has some limitations, such as performance issues, as it creates a new process for each request, making it not suitable for high-traffic websites.
+
+The evolution of CGI led to the development of Java servlets, PHP, and various web frameworks such as Ruby on Rails, Django, and AngularJS. These technologies provide a more scalable and efficient way of generating dynamic content compared to CGI.
+
+CGI and Web Server
+------------------
+
+When a web browser makes a request to a web server, the server processes the request and executes the appropriate CGI script to generate the required content. The script interacts with the database and provides the data back to the web browser. CGI facilitates the communication between the web server and the backend.
+
+JavaScript and Web Architecture
+------------------------------
+
+JavaScript is a programming language that runs on the client-side, i.e., on the web browser. It allows for more dynamic and interactive web pages. With JavaScript, some of the workload can be shifted from the web server to the client-side, resulting in better performance and user experience.
+
+The evolution of web architecture has led to the development of more sophisticated and dynamic web applications. The architecture has evolved from a simple browser-server model to a more complex model involving application servers, load balancers, and caching mechanisms.
+
+Model-View-Controller (MVC) Framework
 ------------------------------------
 
-* Web architecture consists of a web server and a web browser, communicating via requests and responses.
-* Static web pages are cacheable and indexable.
-* Common Gateway Interface (CGI) is an interface that allows scripts to run on the web server, evolving into mechanisms like React framework.
-* CGI scripts can be written in various languages, such as C or C++, and are plugins that run on the web server.
-* CGI is not a scalable architecture but was the best solution at the time.
-* Web Browser makes a request to the web server, and the CGI script provides the data from the database back to the web browser.
-* JavaScript runs on the web browser, evolving the architecture by shifting workload to the client and making web pages more dynamic.
+The MVC framework is a software design pattern that separates the application logic into three interconnected components, i.e., the model, view, and controller. The model represents the data and the business logic, the view represents the user interface, and the controller handles the input and updates the model and view accordingly.
 
-Evolution of CGI:
------------------
+The MVC framework provides a modular and organized way of building web applications. It allows for better code reusability, maintainability, and scalability. The framework can be implemented using various programming languages and web frameworks such as Ruby on Rails, Django, and AngularJS.
 
-* CGI evolved into Java Servlets, PHP, and different web frameworks like Ruby on Rails and Angular.
-* CGI facilitates communication between the web server and the backend.
-* JavaScript allows for dynamic web forms and communication with the backend through CGI scripts.
+Apache Struts
+-------------
 
-Model View Controller (MVC) and Web Architecture:
-----------------------------------------------
+Apache Struts is an open-source web application framework for developing Java EE web applications. It is based on the MVC architecture and provides a flexible and customizable way of building web applications. Apache Struts allows for the externalization of configuration files, making it easier to manage and maintain the application.
 
-* MVC is a way of modularizing service code by shifting code into the web browser, where the view is essentially.
-* The view communicates with the model, and the controller, which runs on the application server side, handles actions.
-* The Nbc and model view controller pattern provide a lot of dynamic control and configuration-based code execution.
+However, managing configuration files can become challenging as the application becomes more complex. Therefore, it is essential to have a proper configuration management strategy in place.
 
-Web 1.0 and Web 2.0:
---------------------
+Web 1.0 and Web 2.0
+-------------------
 
-* Web 1.0 existed for 15 years, from 1990 to 2005, and supported read-only content and basic web architectures.
-* Web 2.0, starting in 2005, shifted the architecture to allow for running applications or parts of applications on mobile devices or the browser and with Internet of Things.
-* Web 2.0 enhanced standards, such as XML, HTTP request, and XHR, enabled running entire applications or parts of applications on mobile devices or the browser.
-* Web 2.0 led to the evolution of various applications and VRS.
+Web 1.0 was the first generation of the World Wide Web, characterized by static web pages and read-only content. Web 2.0, on the other hand, is the second generation of the World Wide Web, characterized by dynamic and interactive web pages. Web 2.0 provides a more user-centric and participatory web experience, enabling users to interact and collaborate with each other.
 
----
+Web 2.0 has led to the development of various web technologies such as AJAX, Web Services, and Mashups. These technologies provide a more efficient and interactive way of building web applications.
 
-Class-Note on Application Server and Web:
-========================================
+AJAX
+----
 
-The lecture discussed the evolution of the web and application servers, focusing on the shift from Web 1.0 to Web 2.0 and the emergence of new technologies such as Ajax and IoT devices.
+AJAX (Asynchronous JavaScript and XML) is a web development technique that allows for updating parts of a web page without reloading the entire page. It provides a more seamless and responsive user experience.
 
-Web 1.0 consisted of static web pages, while Web 2.0 introduced dynamic content and the ability to run full-featured applications using web protocols. The underlying architecture of Web 2.0 became more complex, with new components such as content providers, content delivery networks (CDNs), and web application firewalls (WAFs).
+AJAX is based on various technologies such as JavaScript, XMLHttpRequest, and XML. It allows for asynchronous communication between the client and the server, enabling the client to request and receive data from the server without reloading the entire page.
 
-Ajax and the XHR protocol allowed for asynchronous communication between the web browser and the server, enabling the development of single page applications (SPAs) such as Facebook and Twitter. These SPAs provide a seamless user experience by dynamically updating content without requiring the user to reload the page.
+Conclusion
+----------
 
-The emergence of IoT devices and the MQTT protocol has allowed for the integration of these devices into web applications. This has led to the development of complex cloud architectures and the use of CDNs to distribute content and improve application performance.
+The evolution of CGI and web architecture has led to the development of more sophisticated and dynamic web applications. The MVC framework and Apache Struts provide a modular and organized way of building web applications. Web 2.0 and AJAX provide a more user-centric and interactive web experience. Understanding these concepts and technologies is essential for building modern web applications.
 
-Web 2.0 also introduced new security measures, such as WAFs, to prevent denial of service attacks and protect APIs. These security measures are crucial for protecting web applications and user data.
+Class-Note for Exam
+==================
 
-The evolution of web technologies has allowed for the monetization of web applications, with businesses finding new ways to sell products and services based on user behavior and interactions.
+Topic: End System/Web Server - Ajax and Web 2.0 Architecture
 
-The lecture concluded by mentioning the emergence of Web 3.0 and the semantic web, which aims to provide a more intelligent and intuitive web experience.
+1. Ajax: Allows updating a segment of a web page without reloading the entire page. It uses XmlHttpRequest to communicate asynchronously between the browser and the server. Ajax allows for dynamic content and interaction on web pages, improving user experience by reducing load times and providing real-time updates.
+2. Web 2.0 Architecture: Enables full-featured applications using web protocols and supports multiple clients, such as mobile apps and IoT devices. It has evolved from static web pages (Web 1.0) to dynamic content (Web 2.0) and is now moving towards semantic web and Web 3.0.
+3. Content Distribution Networks (CDNs): A system of distributed servers that deliver content to users based on their geographical location. CDNs improve website performance by reducing the distance between the user and the server, caching content, and balancing the load between servers.
+4. Web Application Firewalls (WAFs): Security measures designed to protect web applications from threats such as cross-site scripting (XSS), SQL injection, and denial-of-service (DoS) attacks. WAFs are often implemented in cloud environments to secure APIs and prevent unauthorized access.
+5. Single Page Applications (SPAs): Web applications that dynamically rewrite the current web page without requiring a full page reload. SPAs provide a seamless user experience by updating content in real-time and reducing the need for page reloads. Examples include Facebook, Twitter, and Gmail.
+6. Web 3.0 and Semantic Web: The next generation of web technology focusing on making the web more intelligent, intuitive, and user-friendly. Web 3.0 aims to create a web that understands and responds to user needs by providing personalized, dynamic content based on user behavior and preferences.
+7. Architecture Evolution: The evolution of web architecture has moved from static web pages to dynamic content and is now focused on creating a more interactive, user-centric web experience. This evolution has been driven by advancements in technology, user expectations, and the need for monetization.
 
----
-
-Key Takeaways:
---------------
-
-* Web 2.0 introduced dynamic content and the ability to run full-featured applications using web protocols.
-* Ajax and the XHR protocol allowed for asynchronous communication between the web browser and the server, enabling the development of single page applications (SPAs).
-* The emergence of IoT devices and the MQTT protocol has allowed for the integration of these devices into web applications.
-* Web 2.0 introduced new security measures, such as WAFs, to prevent denial of service attacks and protect APIs.
-* The evolution of web technologies has allowed for the monetization of web applications.
-* The emergence of Web 3.0 and the semantic web aims to provide a more intelligent and intuitive web experience.
-
-Actionable Steps:
+Exam Preparation
 ----------------
 
-* Stay up-to-date with the latest web technologies and trends.
-* Consider the use of SPAs and IoT devices in web applications to improve user experience and functionality.
-* Implement security measures such as WAFs to protect web applications and user data.
-* Explore monetization opportunities in web applications based on user behavior and interactions.
-* Keep an eye on the development of Web 3.0 and the semantic web and consider how it may impact web development in the future.
+1. Understand the basics of Ajax, its role in web development, and its impact on user experience.
+2. Familiarize yourself with Web 2.0 architecture, its components, and its evolution towards Web 3.0 and the semantic web.
+3. Learn about Content Distribution Networks (CDNs) and their role in improving website performance and security.
+4. Understand the importance of Web Application Firewalls (WAFs) and their role in securing web applications and APIs.
+5. Recognize the benefits of Single Page Applications (SPAs) and their role in creating a seamless user experience.
+6. Stay updated on the latest trends and developments in Web 3.0 and the semantic web.
+
+2.0 is that it allowed for more complex and sophisticated web applications, with the use of single page applications (SPAs) and asynchronous JavaScript interactions. This evolution led to the need for more advanced ways to handle asynchronous code, leading to the development of promises and then async/await.
+
+Along with these advancements, the Model-View-Controller (MVC) pattern also evolved, leading to the creation of the Flux pattern used by Facebook. This pattern helps to manage the complexity of multiple models interacting with multiple views by storing the state in a central location called a store.
+
+As we move towards web 3.0, we are seeing even more advanced technologies being integrated into the web, such as artificial intelligence (AI), virtual reality (VR), and blockchain. These technologies are changing the way we interact with the web and will continue to shape its evolution in the future.
+
+In summary, the evolution of the web has allowed for more complex and advanced web applications, with the development of single page applications, asynchronous JavaScript interactions, and advanced design patterns such as Flux. The web will continue to evolve with the integration of new technologies such as AI, VR, and blockchain.
+
+Class Notes:
+
+Web 2.0 Architecture and Evolution
+===================================
+
+The lecture focused on the evolution of web architecture, with a focus on Web 2.0 and its impact on various industries such as banking, insurance, and entertainment. The evolution of APIs to support multiple front-ends, such as mobile phones, browsers, and watches, was discussed. The lecture also covered the security aspect of Web 2.0, highlighting the weaknesses of the user ID and password model and the evolution to the OAuth model.
+
+Key Takeaways:
+
+- Web 2.0 architecture has enabled the evolution of various industries by providing support for multiple front-ends through APIs.
+- The user ID and password model of security has weaknesses and has evolved to the OAuth model.
+
+OAuth Model
+==========
+
+The lecture then moved on to the OAuth model, which is a token-based model for authorization. The components involved in the OAuth model are the client, API gateway, API running on web services, and the identity provider. The client requests authorization by supplying a client ID and secret, and in return, receives a token that can be used to access resources.
+
+Key Takeaways:
+
+- The OAuth model is a token-based model for authorization.
+- The components involved in the OAuth model are the client, API gateway, API running on web services, and the identity provider.
+
+Web 3.0 Architecture
+===================
+
+The lecture concluded by discussing Web 3.0 architecture, which is the evolution of Web 2.0. The focus of Web 3.0 is to decentralize communication and remove restrictions of specific software and hardware. The lecture highlighted the use of blockchain technology to improve security architecture and remove restrictions.
+
+Key Takeaways:
+
+- Web 3.0 architecture is the evolution of Web 2.0.
+- The focus of Web 3.0 is to decentralize communication and remove restrictions of specific software and hardware.
