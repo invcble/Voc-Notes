@@ -13,7 +13,7 @@ max_token_length = 5000
 split_lecture = [lecture[i : i + max_token_length] for i in range(0, len(lecture), max_token_length)]
 generated_response = []
 
-for i in range(len(split_lecture)-1):
+for i in range(0, len(split_lecture)-1, 2):
     # assistant_content = ''
 
     complete_chat = Client.chat.completions.create(
