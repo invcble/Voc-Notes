@@ -1,10 +1,9 @@
 from groq import Groq
-import time
 
 with open('API-key-grok.json', 'r') as r:
     key = r.read()
 
-with open("Lecture_transcript.txt", 'rb') as f:
+with open("Lecture_transcript.txt", 'r') as f:
     lecture = str(f.read())
     
 Client = Groq(api_key= key)
@@ -14,7 +13,6 @@ split_lecture = [lecture[i : i + max_token_length] for i in range(0, len(lecture
 generated_response = []
 
 for i in range(0, len(split_lecture)-1, 2):
-    # assistant_content = ''
 
     complete_chat = Client.chat.completions.create(
         messages=[
@@ -38,11 +36,8 @@ for i in range(0, len(split_lecture)-1, 2):
         temperature=0
     )
 
-    # assistant_content = complete_chat.choices[0].message.content
     generated_response.append(complete_chat.choices[0].message.content)
-    # time.sleep(1)
 
-# print(generated_response)
 
 with open('Groq_ClassNote2.md', 'w') as f:
     for each in generated_response:
