@@ -5,15 +5,19 @@ with open('API-key-grok.json', 'r') as r:
 
 with open("Lecture_transcript.txt", 'r') as f:
     lecture = str(f.read())
-    
+
+if len(lecture) < 5001:
+    lecture += ' ' * (5001 - len(lecture))
+
 Client = Groq(api_key= key)
 
-max_token_length = 10000
+max_token_length = 5000
 split_lecture = [lecture[i : i + max_token_length] for i in range(0, len(lecture), max_token_length)]
 generated_response = ""
 
-for chunk in split_lecture:
-    print("check") #########
+for i in range(0, len(split_lecture)-1, 2):
+
+    print('check') #########
     note_chunks = Client.chat.completions.create(
         messages=[
             {
@@ -23,7 +27,13 @@ for chunk in split_lecture:
             },
             {
                 "role": "user",
-                "content": chunk
+                "content": split_lecture[i]
+
+            },
+            {
+                "role": "user",
+                "content": split_lecture[i+1]
+
             }
         ],
         model="mixtral-8x7b-32768",
@@ -48,7 +58,7 @@ final_note = Client.chat.completions.create(
 
             }
         ],
-        model="mixtral-8x7b-32768",
+        model="llama3-70b-8192",
         temperature=0
     )
 
