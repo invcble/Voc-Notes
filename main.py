@@ -5,10 +5,11 @@ import sounddevice as sd
 from scipy.io.wavfile import write
 import time
 
+from Google_S2T import google_S2T
 
-# Audio sample rate
-fs = 16000
-seconds = 3
+
+fs = 44100          # Audio sample rate
+chunk_size = fs * 50        #50 seconds
 
 global audio_queue
 audio_queue = []
@@ -37,16 +38,21 @@ while True:
 
 audio_queue = np.concatenate(audio_queue, axis=0)
 # Normalize audio to [-1, 1] and scale to 16 bit integer
-recorded_audio = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
-write("recording.wav",  fs, recorded_audio)
+recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
+record_chunks = [recorded_audio_data[i : i + chunk_size] for i in range(0, len(recorded_audio_data), chunk_size)]
 
+lecture_text = ''
 
+for i in range(len(record_chunks)):
+    write(f"temp_audio_folder/record_chunk_{i}.wav", fs, record_chunks[i])
 
-model = whisper.load_model("whisper_models\\small.en.pt")
-result = model.transcribe("recording.wav")
-print(result["text"])
+    text = google_S2T(f"temp_audio_folder/record_chunk_{i}.wav", fs)
+    lecture_text += text + ' '
 
-
-
-# for each in ["audio.srt", "audio.txt", "audio.tsv", "audio.vtt"]:
-#     os.remove(each)
+print('-' * 80)
+print("Google Speech to Text billing seconds", i * 50)
+print('-' * 80)
+print(lecture_text)
+# model = whisper.load_model("whisper_models\\small.en.pt")
+# result = model.transcribe("recording.wav")
+# print(result["text"])
