@@ -52,7 +52,9 @@ for i in range(len(record_chunks)):
 print('-' * 80)
 print("Google Speech to Text billing seconds", i * 50)
 print('-' * 80)
-print(lecture_text)
+
+with open("new_lecture_transcript.txt", 'w') as f:
+    f.write(lecture_text)
 # model = whisper.load_model("whisper_models\\small.en.pt")
 # result = model.transcribe("recording.wav")
 # print(result["text"])
