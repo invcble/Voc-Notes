@@ -30,3 +30,7 @@ def google_S2T(file_path):
         ttranscript += each.alternatives[0].transcript
 
     return ttranscript
+
+# model = whisper.load_model("whisper_models\\small.en.pt")
+# result = model.transcribe("recording.wav")
+# print(result["text"])

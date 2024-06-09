@@ -7,7 +7,7 @@ def audio_chop(audio_path):
     os.makedirs("temp_audio_folder")
 
     audio = AudioSegment.from_mp3(audio_path)
-    chunk_size = 5000
+    chunk_size = 50000
 
     chunks = make_chunks(audio, chunk_size)
 

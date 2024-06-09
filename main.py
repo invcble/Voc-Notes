@@ -1,4 +1,3 @@
-import whisper
 import numpy as np
 import sounddevice as sd
 from pydub import AudioSegment
@@ -6,6 +5,7 @@ import time
 
 from Google_S2T import google_S2T
 from Audio_chop import audio_chop
+
 
 ################## Handle audio file ##################
 choice = input("Audio upload/record: ").lower()
@@ -56,22 +56,9 @@ else:
     print("Input not recognised!")
 
 
-# record_chunks = [recorded_audio_data[i : i + chunk_size] for i in range(0, len(recorded_audio_data), chunk_size)]
-
-# lecture_text = ''
-
-# for i in range(len(record_chunks)):
-#     write(f"temp_audio_folder/record_chunk_{i}.wav", fs, record_chunks[i])
-
-#     text = google_S2T(f"temp_audio_folder/record_chunk_{i}.wav", fs)
-#     lecture_text += text + ' '
-
-# print('-' * 80)
-# print("Google Speech to Text billing seconds", i * 50)
-# print('-' * 80)
-
 ################## Split audio file ##################
 chunk_list = audio_chop(audio_path)
+
 
 ################## Speech to text ##################
 lecture_text = ''
@@ -82,6 +69,3 @@ with open("new_lecture_transcript.txt", 'w') as f:
     f.write(lecture_text)
 
 
-# model = whisper.load_model("whisper_models\\small.en.pt")
-# result = model.transcribe("recording.wav")
-# print(result["text"])
