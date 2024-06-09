@@ -1,56 +1,61 @@
 import whisper
-import os
 import numpy as np
 import sounddevice as sd
-from scipy.io.wavfile import write
 from pydub import AudioSegment
 import time
 
 from Google_S2T import google_S2T
+from Audio_chop import audio_chop
 
+################## Handle audio file ##################
+choice = input("Audio upload/record: ").lower()
 
-fs = 44100          # Audio sample rate
+if choice == "record":
+    global audio_queue
+    audio_queue = []
 
-global audio_queue
-audio_queue = []
+    def audio_callback(indata, frames, time, status):
+        audio_queue.append(indata.copy())
 
-def audio_callback(indata, frames, time, status):
-    audio_queue.append(indata.copy())
+    stream = sd.InputStream(callback=audio_callback, samplerate=44100, channels=1)
 
-stream = sd.InputStream(callback=audio_callback, samplerate=fs, channels=1)
-
-while True:
-    command = input("Recording start/stop: ").lower()
-    if command == 'start':
-        stream.start()
-        print("Recording started.")
-    elif command == 'stop':
-        if stream.active:
-            stream.stop()
-            stream.close()
-            print("Recording stopped.")
-            break
+    while True:
+        command = input("Recording start/stop: ").lower()
+        if command == 'start':
+            stream.start()
+            print("Recording started.")
+        elif command == 'stop':
+            if stream.active:
+                stream.stop()
+                stream.close()
+                print("Recording stopped.")
+                break
+            else:
+                print("No active Recording.")
         else:
-            print("No active Recording.")
-    else:
-        time.sleep(1)
+            time.sleep(1)
 
 
-audio_queue = np.concatenate(audio_queue, axis=0)
-# Normalize audio to [-1, 1] and scale to 16 bit integer
-recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
+    audio_queue = np.concatenate(audio_queue, axis=0)
+    # Normalize audio to [-1, 1] and scale to 16 bit integer
+    recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
 
-# os.makedirs('temp_audio_folder', exist_ok=True)
+    audio_segment = AudioSegment(
+        recorded_audio_data.tobytes(), 
+        frame_rate=44100,
+        sample_width=recorded_audio_data.dtype.itemsize,
+        channels=1
+    )
 
-audio_segment = AudioSegment(
-    recorded_audio_data.tobytes(), 
-    frame_rate=fs,
-    sample_width=recorded_audio_data.dtype.itemsize,
-    channels=1
-)
+    audio_path = "recorded_audio.mp3"
+    audio_segment.export(audio_path)
 
-audio_segment.export("recorded_audio.mp3")
-##################
+elif choice == "upload":
+    audio_path = input("Paste the path location: ").replace("\\", "\\\\")
+else:
+    print("Input not recognised!")
+
+
 # record_chunks = [recorded_audio_data[i : i + chunk_size] for i in range(0, len(recorded_audio_data), chunk_size)]
 
 # lecture_text = ''
@@ -65,10 +70,18 @@ audio_segment.export("recorded_audio.mp3")
 # print("Google Speech to Text billing seconds", i * 50)
 # print('-' * 80)
 
-# with open("new_lecture_transcript.txt", 'w') as f:
-#     f.write(lecture_text)
+################## Split audio file ##################
+chunk_list = audio_chop(audio_path)
 
-print(google_S2T("recorded_audio.mp3", fs))
+################## Speech to text ##################
+lecture_text = ''
+for each_path in chunk_list:
+    lecture_text += google_S2T(each_path) + ' '
+
+with open("new_lecture_transcript.txt", 'w') as f:
+    f.write(lecture_text)
+
+
 # model = whisper.load_model("whisper_models\\small.en.pt")
 # result = model.transcribe("recording.wav")
 # print(result["text"])
