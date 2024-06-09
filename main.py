@@ -71,4 +71,4 @@ with open("lecture_transcript.txt", 'w') as f:
 
 
 ################## LLM note conversion ##################
-lecture_to_note("lecture_transcript.txt")#
+lecture_to_note("lecture_transcript.txt")
