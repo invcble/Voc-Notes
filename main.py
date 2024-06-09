@@ -5,6 +5,7 @@ import time
 
 from Google_S2T import google_S2T
 from Audio_chop import audio_chop
+from Groq_LLM import lecture_to_note
 
 
 ################## Handle audio file ##################
@@ -37,7 +38,7 @@ if choice == "record":
 
 
     audio_queue = np.concatenate(audio_queue, axis=0)
-    # Normalize audio to [-1, 1] and scale to 16 bit integer
+    ###### Normalize audio to [-1, 1] and scale to 16 bit integer
     recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
 
     audio_segment = AudioSegment(
@@ -69,3 +70,5 @@ with open("lecture_transcript.txt", 'w') as f:
     f.write(lecture_text)
 
 
+################## LLM note conversion ##################
+lecture_to_note("lecture_transcript.txt")
