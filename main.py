@@ -65,7 +65,7 @@ lecture_text = ''
 for each_path in chunk_list:
     lecture_text += google_S2T(each_path) + ' '
 
-with open("new_lecture_transcript.txt", 'w') as f:
+with open("lecture_transcript.txt", 'w') as f:
     f.write(lecture_text)
 
 
