@@ -5,6 +5,8 @@ import time
 st.title("Welcome to Voc-Notes!")
 st.write("Hi Student!")
 
+st.write("")
+st.write("")
 st.write("📤 You chose to upload the Audio! 📤")
 click_upload = st.button("1 - Start Uploading ⬆️")
 

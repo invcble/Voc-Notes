@@ -5,6 +5,8 @@ import time
 st.title("Welcome to Voc-Notes!")
 st.write("Hi Student!")
 
+st.write("")
+st.write("")
 st.write("🎙️ You chose to record the Audio! 🎙️")
 click_start = st.button("1 - Start Recording ⏺️")
 click_stop = st.button("2 - Stop Recording ⏸️")
