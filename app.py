@@ -2,26 +2,29 @@ import streamlit as st
 from Engine import start_recording, stop_recording
 
 st.title("Welcome to Voc-Notes!")
-st.write("Hi student!")
+st.write("'''Hi Student! Meet your AI-powered Lecture Note maker. 🤖'''")
 
 # st.write("Imon you are from ", answer)
 
 st.write("What do you want to do?")
-click_record = st.button("Record Audio")
-click_upload = st.button("Upload Audio")
-# st.download_button()
+# click_record = st.button("Record Audio")
+# click_upload = st.button("Upload Audio")
+# # st.download_button()
 
-if "recording" not in st.session_state:
-    st.session_state.record = False
+st.page_link("pages\\1_record.py", label="Record Audio", icon='🎙️')
+st.page_link("pages\\2_upload.py", label="Upload Audio", icon='📤')
 
-if "upload" not in st.session_state:
-    st.session_state.upload = False
+# if "recording" not in st.session_state:
+#     st.session_state.record = False
 
-if click_record:
-    st.session_state.record = True
-    st.session_state.upload = False
-    click_start = st.button("Start Recording.")
-    click_stop = st.button("Stop Recording.")
+# if "upload" not in st.session_state:
+#     st.session_state.upload = False
+
+# if click_record:
+#     st.session_state.record = True
+#     st.session_state.upload = False
+#     click_start = st.button("Start Recording.")
+#     click_stop = st.button("Stop Recording.")
     # start_recording()
 
 # if click_stop:
