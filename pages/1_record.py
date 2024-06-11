@@ -27,11 +27,11 @@ if click_stop:
 
 if st.session_state.start:
     st.write("Recording started...")
-    # start_recording()
+    start_recording()
 
 if st.session_state.stop:
     st.write("Recording stopped...")
-    time.sleep(1)
+    stop_recording()
     st.write("Recording successfully saved.")
 
 st.write("========================================================")

@@ -9,8 +9,6 @@ from Groq_LLM import lecture_to_note
 
 
 ################## Handle audio file ##################
-# choice = input("Audio upload/record: ").lower()
-
 
 global audio_queue
 global audio_path
@@ -24,6 +22,7 @@ stream = sd.InputStream(callback=audio_callback, samplerate=44100, channels=1)
 
 def start_recording():
     if not stream.active:
+        print("recording started")
         stream.start()
 
 def stop_recording():
@@ -31,28 +30,30 @@ def stop_recording():
     global audio_path
 
     if stream.active:
+        print("recording stopped")
         stream.stop()
         stream.close()
 
-        audio_queue = np.concatenate(audio_queue, axis=0)
-        ###### Normalize audio to [-1, 1] and scale to 16 bit integer
-        recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
+        # audio_queue = np.concatenate(audio_queue, axis=0)
+        # ###### Normalize audio to [-1, 1] and scale to 16 bit integer
+        # recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
 
-        audio_segment = AudioSegment(
-            recorded_audio_data.tobytes(), 
-            frame_rate=44100,
-            sample_width=recorded_audio_data.dtype.itemsize,
-            channels=1
-        )
+        # audio_segment = AudioSegment(
+        #     recorded_audio_data.tobytes(), 
+        #     frame_rate=44100,
+        #     sample_width=recorded_audio_data.dtype.itemsize,
+        #     channels=1
+        # )
 
-        audio_path = "recorded_audio.mp3"
-        audio_segment.export(audio_path)
+        # audio_path = "recorded_audio.mp3"
+        # audio_segment.export(audio_path)
 
 
 def upload_recording(path):
     global audio_path
 
     audio_path = path.replace("\\", "\\\\")
+    print("you uploaded ", audio_path)
 
 
 # ################## Split audio file ##################
