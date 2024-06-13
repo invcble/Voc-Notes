@@ -48,6 +48,8 @@ def stop_recording():
         # audio_path = "recorded_audio.mp3"
         # audio_segment.export(audio_path)
 
+        generate_note()
+
 
 def upload_recording(path):
     global audio_path
@@ -55,19 +57,26 @@ def upload_recording(path):
     audio_path = path.replace("\\", "\\\\")
     print("you uploaded ", audio_path)
 
+    generate_note()
 
-# ################## Split audio file ##################
-# chunk_list = audio_chop(audio_path)
+def generate_note():
+    global audio_path
 
-
-# ################## Speech to text ##################
-# lecture_text = ''
-# for each_path in chunk_list:
-#     lecture_text += google_S2T(each_path) + ' '
-
-# with open("lecture_transcript.txt", 'w') as f:
-#     f.write(lecture_text)
+    ################## Split audio file ##################
+    print("Splitting Audio to chunks...")
+    chunk_list = audio_chop(audio_path)
 
 
-# ################## LLM note conversion ##################
-# lecture_to_note("lecture_transcript.txt")
+    ################## Speech to text ##################
+    print("Converting Speech to text...")
+    lecture_text = ''
+    for each_path in chunk_list:
+        lecture_text += google_S2T(each_path) + ' '
+
+    with open("lecture_transcript.txt", 'w') as f:
+        f.write(lecture_text)
+
+
+    ################## LLM note conversion ##################
+    print("Sending data to LLM to generate Note...")
+    lecture_to_note("lecture_transcript.txt")
