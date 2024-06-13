@@ -8,6 +8,8 @@ st.write("")
 st.write("What do you want to do?")
 # # st.download_button()
 
-st.page_link("pages\\1_record.py", label="Record Audio", icon='🎙️')
+st.page_link("pages\\1_record.py", label="Record Audio & Generate Note", icon='🎙️')
 
-st.page_link("pages\\2_upload.py", label="Upload Audio", icon='📤')
+st.page_link("pages\\2_upload.py", label="Upload Audio & Generate Note", icon='📤')
+
+st.page_link("pages\\4_database.py", label="View and Download saved Notes", icon='💾')

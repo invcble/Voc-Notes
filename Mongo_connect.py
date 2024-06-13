@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from datetime import datetime
 
 
 def get_mongo_client():
@@ -7,7 +8,8 @@ def get_mongo_client():
     return MongoClient(mongo_uri)
 
 
-def upload_transcript(transcript_path, transcript_name):
+
+def upload_transcript(transcript_path):
     client = get_mongo_client()
     db = client.get_database("VOC-NOTES-FILES")
     collection = db.get_collection("processed_transcript")
@@ -16,7 +18,7 @@ def upload_transcript(transcript_path, transcript_name):
         processed_text = file.read()
 
     document = {
-        "filename": "ptscript_" + transcript_name,
+        "filename": "ptscript_" + datetime.now().strftime("%H_%M"),
         "content": processed_text
     }
 
@@ -25,7 +27,8 @@ def upload_transcript(transcript_path, transcript_name):
     client.close()
 
 
-def upload_note(note_path, note_name):
+
+def upload_note(note_path):
     client = get_mongo_client()
     db = client.get_database("VOC-NOTES-FILES")
     collection = db.get_collection("class_notes")
@@ -34,13 +37,14 @@ def upload_note(note_path, note_name):
         note_text = file.read()
 
     document = {
-        "filename": "genNote_" + note_name,
+        "filename": "genNote_" + datetime.now().strftime("%H_%M"),
         "content": note_text
     }
 
     collection.insert_one(document)
     print(f"Class note uploaded to Database")
     client.close()
+
 
 
 def list_notes():
@@ -53,6 +57,7 @@ def list_notes():
 
     client.close()
     return filenames
+
 
 
 def pull_document(document_name):

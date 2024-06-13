@@ -6,6 +6,7 @@ import time
 from Google_S2T import google_S2T
 from Audio_chop import audio_chop
 from Groq_LLM import lecture_to_note
+import Mongo_connect
 
 
 ################## Handle audio file ##################
@@ -34,22 +35,19 @@ def stop_recording():
         stream.stop()
         stream.close()
 
-        # audio_queue = np.concatenate(audio_queue, axis=0)
-        # ###### Normalize audio to [-1, 1] and scale to 16 bit integer
-        # recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
+        audio_queue = np.concatenate(audio_queue, axis=0)
+        ###### Normalize audio to [-1, 1] and scale to 16 bit integer
+        recorded_audio_data = np.int16(audio_queue / np.max(np.abs(audio_queue)) * 32767)
 
-        # audio_segment = AudioSegment(
-        #     recorded_audio_data.tobytes(), 
-        #     frame_rate=44100,
-        #     sample_width=recorded_audio_data.dtype.itemsize,
-        #     channels=1
-        # )
+        audio_segment = AudioSegment(
+            recorded_audio_data.tobytes(), 
+            frame_rate=44100,
+            sample_width=recorded_audio_data.dtype.itemsize,
+            channels=1
+        )
 
-        # audio_path = "recorded_audio.mp3"
-        # audio_segment.export(audio_path)
-
-        generate_note()
-
+        audio_path = "recorded_audio.mp3"
+        audio_segment.export(audio_path)
 
 def upload_recording(path):
     global audio_path
@@ -57,17 +55,16 @@ def upload_recording(path):
     audio_path = path.replace("\\", "\\\\")
     print("you uploaded ", audio_path)
 
-    generate_note()
-
-def generate_note():
+def split_audio():
     global audio_path
+    global chunk_list
 
-    ################## Split audio file ##################
     print("Splitting Audio to chunks...")
     chunk_list = audio_chop(audio_path)
 
+def speech2text():
+    global chunk_list
 
-    ################## Speech to text ##################
     print("Converting Speech to text...")
     lecture_text = ''
     for each_path in chunk_list:
@@ -76,7 +73,16 @@ def generate_note():
     with open("lecture_transcript.txt", 'w') as f:
         f.write(lecture_text)
 
+    Mongo_connect.upload_transcript("lecture_transcript.txt")
 
-    ################## LLM note conversion ##################
+def LLM_call():
+    global gen_data
+
     print("Sending data to LLM to generate Note...")
-    lecture_to_note("lecture_transcript.txt")
+    gen_data = lecture_to_note("lecture_transcript.txt")
+
+    with open('Groq_ClassNote.md', 'w') as f:
+        f.write(gen_data)
+        
+    Mongo_connect.upload_note('Groq_ClassNote.md')
+    return gen_data

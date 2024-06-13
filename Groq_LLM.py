@@ -16,9 +16,10 @@ def lecture_to_note(lecture_path):
     split_lecture = [lecture[i : i + max_token_length] for i in range(0, len(lecture), max_token_length)]
     generated_response = ""
 
+    print("Generating response using mixtral..")
     for i in range(0, len(split_lecture)-1, 2):
 
-        print('check') #########
+        # print('check') #########
         note_chunks = Client.chat.completions.create(
             messages=[
                 {
@@ -46,6 +47,7 @@ def lecture_to_note(lecture_path):
 
     print("Generated chunk sizes", len(generated_response))
 
+    print("Generating response using llama3..")
     final_note = Client.chat.completions.create(
             messages=[
                 {
@@ -66,5 +68,4 @@ def lecture_to_note(lecture_path):
 
     print("Generated final size", len(final_note.choices[0].message.content))
 
-    with open('Groq_ClassNote.md', 'w') as f:
-        f.write(final_note.choices[0].message.content)
+    return final_note.choices[0].message.content
