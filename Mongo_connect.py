@@ -37,7 +37,7 @@ def upload_note(note_path):
         note_text = file.read()
 
     document = {
-        "filename": "genNote_" + datetime.now().strftime("%H_%M"),
+        "filename": "genNote_" + datetime.now().strftime("time_%H:%M"),
         "content": note_text
     }
 
