@@ -1,6 +1,7 @@
 whisper_models
 API-key.json
 API-key-grok.json
+API-key-mongo.json
 temp_audio_folder
 recorded_audio.mp3
 __pycache__
