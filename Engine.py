@@ -1,12 +1,12 @@
 import numpy as np
 import sounddevice as sd
 from pydub import AudioSegment
-import time
+import os
 
 from Google_S2T import google_S2T
 from Audio_chop import audio_chop
 from Groq_LLM import lecture_to_note
-import Mongo_connect
+import Mongo_connect, Data_tableauhyper
 
 
 ################## Handle audio file ##################
@@ -83,6 +83,20 @@ def LLM_call():
 
     with open('Groq_ClassNote.md', 'w') as f:
         f.write(gen_data)
-        
+
     Mongo_connect.upload_note('Groq_ClassNote.md')
     return gen_data
+
+def display_notes():
+    return Mongo_connect.list_notes()
+
+def download_note(note_name):
+    content = Mongo_connect.pull_document(note_name)
+
+    print(f"Downloading {note_name}")
+    os.makedirs("Voc-Note Downloads", exist_ok=True)
+    with open(f"Voc-Note Downloads/{note_name}.md", 'w') as f:
+        f.write(content)
+
+def gen_hyper():
+    Data_tableauhyper.create_hyper('lecture_transcript.txt')
