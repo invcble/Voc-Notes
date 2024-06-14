@@ -21,10 +21,6 @@ def google_S2T(file_path):
         audio=audio_data
     )
 
-    # print('-' * 80)
-    # print("Google Speech to Text API time billed", response.total_billed_time)
-    # print('-' * 80)
-
     ttranscript = ""
     for each in response.results:
         ttranscript += each.alternatives[0].transcript
