@@ -2,11 +2,7 @@
 
 ## Project Overview
 
-This project aims to transform live lecture audio into structured, insightful educational content using state-of-the-art technology. Our system captures live audio, converts it into text, preprocesses the data, summarizes it into concise class notes, stores the processed data, and finally visualizes the information for insights. The project leverages various technologies such as Google Cloud Speech-to-Text, Apache Spark, GPT models, MongoDB, and Tableau to ensure efficiency and scalability.
-
-## Current Status
-
-This project is currently under development. Key architectural decisions are being made to shape the software architecture, ensuring that each component integrates seamlessly and performs optimally. We are exploring various technologies and frameworks to find the best fit for each part of our system.
+This project aims to transform live lecture audio into structured, insightful educational content using state-of-the-art technology. The system captures live audio, converts it into text, preprocesses the data, summarizes it into concise class notes, stores the processed data, and finally visualizes the information for insights. The project leverages various technologies such as Google Cloud Speech-to-Text, Apache Spark, Groq LLMs, MongoDB, and Tableau to ensure efficiency and scalability.
 
 ## Architecture Decision Records (ADRs)
 
@@ -21,20 +17,20 @@ We have documented several key architectural decisions in our ADRs. These decisi
 ## System Components and Technologies Used
 
 - **Streamlit** for UI (front-end)
-- **Whisper AI**
-- **Google Cloud Speech-to-Text**
-- **PySpark**
-- **Ollama**
-- **LLMs**: Mixtral-8x7b (32768 token size) & Llama3-70b (8192 token size)
-- **PyMongo**
-- **Tableau**
+- **Whisper AI** for high-quality audio capture
+- **Google Cloud Speech-to-Text** for accurate transcription
+- **PySpark** for efficient data preprocessing
+- **Groq** for managing large language models
+- **LLMs**: Mixtral-8x7b (32768 token size) & Llama3-70b (8192 token size) for advanced summarization
+- **PyMongo** for data storage
+- **Tableau** for data visualization
 
 ## Workflow Summary
 
 1. **Audio Capture/Upload**: Users can either capture live lecture audio or upload an existing audio file using Streamlit for the front-end interface.
 2. **Audio-to-Text Conversion**: The audio is converted into text using Google Cloud Speech-to-Text, chosen for its scalability and efficiency.
 3. **Data Preprocessing**: The text data is cleaned and preprocessed using PySpark, removing stop words and tokenizing the text to prepare it for summarization.
-4. **Text Summarization**: Using Mixtral and Llama 3 models through groq inference, the preprocessed text is summarized into concise class notes.
+4. **Text Summarization**: Using Mixtral-8x7b and Llama3-70b models through groq inference, the preprocessed text is summarized into concise class notes. Mixtral-8x7b handles large context chunks, while Llama3-70b combines the chunked results into coherent summaries.
 5. **Data Storage**: The processed and summarized data is stored in MongoDB for efficient retrieval and scalability.
 6. **Data Visualization**: Finally, the information is visualized using Tableau, providing insightful and structured educational content.
 
