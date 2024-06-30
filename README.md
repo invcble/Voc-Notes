@@ -4,6 +4,13 @@
 
 This project aims to transform live lecture audio into structured, insightful educational content using state-of-the-art technology. The system captures live audio, converts it into text, preprocesses the data, summarizes it into concise class notes, stores the processed data, and finally visualizes the information for insights. The project leverages various technologies such as Google Cloud Speech-to-Text, Apache Spark, Groq LLMs, MongoDB, and Tableau to ensure efficiency and scalability.
 
+### Application Interface
+
+Here's how Voc Notes interface looks in action,
+
+![VocNotes Interface](https://github.com/invcble/Voc-Notes/assets/58978137/438262a9-db70-4641-8cc6-954eb74c4976)
+
+
 ## Architecture Decision Records (ADRs)
 
 We have documented several key architectural decisions in our ADRs. These decisions are crucial for the development and future scalability of our project. You can find more details about each decision in the following ADRs:
